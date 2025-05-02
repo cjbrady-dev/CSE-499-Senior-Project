@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <script src="main.js"></script>
+    <!-- <script src="main.js"></script> -->
+    <script src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQFSOGHWpfBot6zoRT7eTAcg-Bvo-U3cLV6rf6D5fqMJ7NtyQGD_115uNCuoCxFH5gH8EmyxyhdqUyV/pubhtml"></script>
 </head>
 <body>
     <header>
@@ -13,6 +14,37 @@
     </header>
     <main>
         <div id="item-container"></div>
+        <div id="livestock-list"></div>
+        <!-- <div id="livestock-list"></div> may need to take this one out -->
+        <script>
+            const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQFSOGHWpfBot6zoRT7eTAcg-Bvo-U3cLV6rf6D5fqMJ7NtyQGD_115uNCuoCxFH5gH8EmyxyhdqUyV/pubhtml';
+        
+            function showData(data) {
+              const container = document.getElementById("livestock-list");
+              container.innerHTML = ""; // Clear current items
+        
+              data.forEach(item => {
+                container.innerHTML += `
+                  <div class="livestock-item">
+                    <h2>${item.Animal}</h2>
+                    <p>${item.Description}</p>
+                    <p>Price: $${item.Price}</p>
+                    <img src="${item["Image URL"]}" alt="${item.Animal}" width="200" />
+                  </div>
+                  <hr/>
+                `;
+              });
+            }
+        
+            window.addEventListener('DOMContentLoaded', () => {
+              Tabletop.init({
+                key: sheetUrl,
+                callback: showData,
+                simpleSheet: true
+              });
+            });
+          </script>
+
         
     </main>
     <footer>
