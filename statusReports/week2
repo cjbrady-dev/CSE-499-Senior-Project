@@ -6,20 +6,20 @@
 **Project Title: Senior Project**  
 **Team Members (if applicable): Myself**  
 **Project Description: Creaiting Farm website to market farm animals available for sale, allows clients to contact farmer for purchase of animals**  
-**Technologies Used: HTML, CSS, JAVASCRIPT (currently)**  
-**GitHub URL: https://github.com/cjbrady-dev/CSE-499-Senior-Project.git** 
+**Technologies Used: HTML, CSS, JAVASCRIPT, Python**  
+**GitHub URL: https://github.com/cjbrady-dev/CSE-499-Senior-Project/tree/main/statusReports** 
 
 ---
 
 ## Week 2: 5/3/25
-- **Overall Status:** (on-schedule, behind, ahead)
-- **Number of hours worked this week:**
-- **Total number of hours worked on the project thus far:**
-- **Number of total hours anticipated at completion:**
-- **Accomplishments:**
-- **Challenges:**
-- **Plans / Goals for next week:**
-- **SPED Talk Insight:**
-- **Other comments for the instructor:**
+- **Overall Status: on-schedule**
+- **Number of hours worked this week: 9**
+- **Total number of hours worked on the project thus far: 18**
+- **Number of total hours anticipated at completion: 108**
+- **Accomplishments: decided Will work to make a CRUD app to allow my Father, the owner to update the website at will without a developer. Created a timeTracher for this project so I can basicly clock in and out as I work on it. I have however opened the timer up this week to catch up on the time that was not recorded on it for last week.**
+- **Challenges: researching how to make a CRUD app. Deciding how to make a CRUD app.**
+- **Plans / Goals for next week: Create foundation of CRUD app. Research how to allow clients to send emails to the owner if intrested in buying.**
+- **SPED Talk Insight: I was impressed someone wanted to make an AI with a spiking neuro network, which I had never heard of before.**
+- **Other comments for the instructor: I am worried I have bitten off more than I can chew what do you suggest if it turns out to be to big?**
 
 ---
