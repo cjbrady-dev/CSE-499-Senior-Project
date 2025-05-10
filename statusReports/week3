@@ -6,20 +6,20 @@
 **Project Title: Senior Project**  
 **Team Members (if applicable): Myself**  
 **Project Description: Creaiting Farm website to market farm animals available for sale, allows clients to contact farmer for purchase of animals**  
-**Technologies Used: HTML, CSS, JAVASCRIPT (currently)**  
+**Technologies Used: HTML, CSS, JAVASCRIPT, Python**  
 **GitHub URL: https://github.com/cjbrady-dev/CSE-499-Senior-Project.git** 
 
 ---
 
 ## Week 3: 5/10/25
-- **Overall Status:** (on-schedule, behind, ahead)
-- **Number of hours worked this week:**
-- **Total number of hours worked on the project thus far:**
-- **Number of total hours anticipated at completion:**
-- **Accomplishments:**
-- **Challenges:**
-- **Plans / Goals for next week:**
-- **SPED Talk Insight:**
-- **Other comments for the instructor:**
+- **Overall Status: Behind**
+- **Number of hours worked this week: 5**
+- **Total number of hours worked on the project thus far: 23**
+- **Number of total hours anticipated at completion: 103**
+- **Accomplishments: Confirmed the need and use of a CRUD app for completion of this website and project**
+- **Challenges: Deciding the type of CRUD APP or what languages to use and tools for make a CRUD APP for example weather to use Python and Django or FLASK.**
+- **Plans / Goals for next week: I have been looking into Making a CRUD APP out of FLASK rather thank Python and Django. Plan is to make the FLASK version next week.**
+- **SPED Talk Insight: As I made the SPED Talk this week, it helped me review in depth the absolute basics and uses of a CRUD APP it helped me relize even though this seems hard it is actually quite simple and doable.**
+- **Other comments for the instructor: None so far.**
 
 ---
