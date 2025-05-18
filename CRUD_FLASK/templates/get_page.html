@@ -1,32 +1,37 @@
 <!DOCTYPE html>
-<html> 
-
-    <head>
-        <meta charset="utf-8">
-        <title> CRUD App </title>
-    </head>
-
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Brady's Farm Animals</title>
     <style>
-        html {
-            color: white;
-            background-color: black;
+        html { color: white; background-color: black; font-family: sans-serif; }
+        .animal-card {
+            border: 1px solid #ccc; padding: 10px; margin: 10px; width: 300px;
+            background-color: #222; border-radius: 10px;
         }
-
-        text {
-            font-size: 24px;
+        .animal-card img {
+            max-width: 100%; height: auto; border-radius: 5px;
         }
     </style>
+</head>
+<body>
+    <center><h1>Brady's Farm Animals</h1></center>
 
-    <body> 
-        
-        <center> <h1>CRUD Application</h1> </center>
-        <center> <text>The Current Dictionary Values</h2></text> </center>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+        {% for animal in retrieve_dictionary.values() %}
+        <div class="animal-card">
+            {% if animal.image %}
+                <img src="{{ url_for('static', filename='uploads/' + animal.image) }}" alt="{{ animal.name }}">
+            {% endif %}
+            <h3>{{ animal.name }}</h3>
+            <p><strong>Breed:</strong> {{ animal.breed }}</p>
+            <p><strong>Age:</strong> {{ animal.age }}</p>
+            <p><strong>Pedigree:</strong> {{ animal.pedigree }}</p>
+            <p><strong>Description:</strong> {{ animal.description }}</p>
+        </div>
+        {% endfor %}
+    </div>
 
-        <p> dictionary = {{retrieve_dictionary}} </p>
-
-        <br>
-
-        <center> <button onclick="window.location.replace('/')">Return to Home Page</button> </center>
-    </body>
-
+    <center><button onclick="window.location.replace('/')">Return to Home Page</button></center>
+</body>
 </html>

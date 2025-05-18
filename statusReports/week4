@@ -6,20 +6,20 @@
 **Project Title: Senior Project**  
 **Team Members (if applicable): Myself**  
 **Project Description: Creaiting Farm website to market farm animals available for sale, allows clients to contact farmer for purchase of animals**  
-**Technologies Used: HTML, CSS, JAVASCRIPT (currently)**  
-**GitHub URL: https://github.com/cjbrady-dev/CSE-499-Senior-Project.git** 
+**Technologies Used: HTML, CSS, JAVASCRIPT, Python, Flask, CRUD**  
+**GitHub URL: https://github.com/cjbrady-dev/CSE-499-Senior-Project/blob/main/statusReports/week4** 
 
 ---
 
 ## Week 4: 5/17/25
-- **Overall Status:** (on-schedule, behind, ahead)
-- **Number of hours worked this week:**
-- **Total number of hours worked on the project thus far:**
-- **Number of total hours anticipated at completion:**
-- **Accomplishments:**
-- **Challenges:**
-- **Plans / Goals for next week:**
-- **SPED Talk Insight:**
+- **Overall Status: on-schedule**
+- **Number of hours worked this week: 13**
+- **Total number of hours worked on the project thus far: 36**
+- **Number of total hours anticipated at completion: 90**
+- **Accomplishments: Confirmed will use the FLASK version of a CRUD APP. I have been able to build a rough foundation for the APP and am in the process of connecting it to the website for use.**
+- **Challenges: Had a hard time building the CRUD APP and finding out if it would work with FLASK and even understanding how to connect the app to update the website as a seperate entity.**
+- **Plans / Goals for next week: Finish connecting the CRUD APP completely and hopfully start adding finer details to it.**
+- **SPED Talk Insight: I thought it was intresting I like video games as most young men, but I was not sure what Matthew's project was and how OpenGL ties into his project. I like to make 3D game maps for Bannerlord II in my freetime so it was quite intresting to me.**
 - **Other comments for the instructor:**
 
 ---

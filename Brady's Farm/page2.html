@@ -1,61 +1,37 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <!-- <script src="main.js"></script> -->
-    <script src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQFSOGHWpfBot6zoRT7eTAcg-Bvo-U3cLV6rf6D5fqMJ7NtyQGD_115uNCuoCxFH5gH8EmyxyhdqUyV/pubhtml"></script>
+    <title>Brady's Farm Animals</title>
+    <style>
+        body { background-color: black; color: white; font-family: Arial, sans-serif; }
+        .animal { border: 1px solid white; padding: 10px; margin: 10px; }
+        img { max-width: 200px; height: auto; }
+    </style>
 </head>
 <body>
-    <header>
-        <h1><B>Brady Farm</B></h1>
-    </header>
-    <main>
-        <div id="item-container"></div>
-        <div id="livestock-list"></div>
-        <!-- <div id="livestock-list"></div> may need to take this one out -->
-        <script>
-            const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQFSOGHWpfBot6zoRT7eTAcg-Bvo-U3cLV6rf6D5fqMJ7NtyQGD_115uNCuoCxFH5gH8EmyxyhdqUyV/pubhtml';
-        
-            function showData(data) {
-              const container = document.getElementById("livestock-list");
-              container.innerHTML = ""; // Clear current items
-        
-              data.forEach(item => {
-                container.innerHTML += `
-                  <div class="livestock-item">
-                    <h2>${item.Animal}</h2>
-                    <p>${item.Description}</p>
-                    <p>Price: $${item.Price}</p>
-                    <img src="${item["Image URL"]}" alt="${item.Animal}" width="200" />
-                  </div>
-                  <hr/>
-                `;
-              });
-            }
-        
-            window.addEventListener('DOMContentLoaded', () => {
-              Tabletop.init({
-                key: sheetUrl,
-                callback: showData,
-                simpleSheet: true
-              });
-            });
-          </script>
+    <h1>Brady's Farm Animals</h1>
 
-        
-    </main>
-    <footer>
-        
-        <nav>
-            <ul>
-                <li><b><a href="index.html">Home</a></b></li>
-                <li><b><a href="page2.html">page 2</a></b></li>
-            </ul>
-        </nav>
-    </footer>
-    
+    <div class="animal">
+        <img src="wilbur.jpg" alt="Willy"><br>
+        <strong>Name:</strong> Willy<br>
+        <strong>Breed:</strong> holstien<br>
+        <strong>Age:</strong> 3<br>
+        <strong>Pedigree:</strong> herry & martha = willy<br>
+        <strong>Description:</strong> lol<br>
+    </div>
+    <hr>
+
+    <div class="animal">
+        <img src="wilbur.jpg" alt="kingdomsofarda"><br>
+        <strong>Name:</strong> kingdomsofarda<br>
+        <strong>Breed:</strong> none<br>
+        <strong>Age:</strong> 0<br>
+        <strong>Pedigree:</strong> lol<br>
+        <strong>Description:</strong> lksjdflkjsd<br>
+    </div>
+    <hr>
+
 </body>
 </html>
