@@ -4,22 +4,22 @@
 **Email: bra16046@byu.edu**  
 **Phone: 2082524420**  
 **Project Title: Senior Project**  
-**Team Members (if applicable): Myself**  
+**Team Members: Myself**  
 **Project Description: Creaiting Farm website to market farm animals available for sale, allows clients to contact farmer for purchase of animals**  
-**Technologies Used: HTML, CSS, JAVASCRIPT (currently)**  
-**GitHub URL: https://github.com/cjbrady-dev/CSE-499-Senior-Project.git** 
+**Technologies Used: HTML, CSS, JAVASCRIPT, Python, Flask, Crudd App**  
+**GitHub URL: https://github.com/cjbrady-dev/CSE-499-Senior-Project/blob/main/statusReports/week5** 
 
 ---
 
 ## Week 5: 5/24/25
-- **Overall Status:** (on-schedule, behind, ahead)
-- **Number of hours worked this week:**
-- **Total number of hours worked on the project thus far:**
-- **Number of total hours anticipated at completion:**
-- **Accomplishments:**
-- **Challenges:**
-- **Plans / Goals for next week:**
-- **SPED Talk Insight:**
+- **Overall Status: Behind** 
+- **Number of hours worked this week: 6**
+- **Total number of hours worked on the project thus far: 42**
+- **Number of total hours anticipated at completion: 84**
+- **Accomplishments: Got the website to update website items**
+- **Challenges: Had some issues with the crud app not updating website items, rather it would reset and override and delete everything**
+- **Plans / Goals for next week: work on the delete function of the crud app and connect it to the website.**
+- **SPED Talk Insight: Was nice to see how websites and apps connect in the form of progressive web apps.**
 - **Other comments for the instructor:**
 
 ---
