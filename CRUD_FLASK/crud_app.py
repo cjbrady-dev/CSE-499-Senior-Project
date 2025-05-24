@@ -7,11 +7,10 @@ app = Flask(__name__)
 UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-global dictionary
-dictionary = {}
-file = open("dictionary_file.pkl", 'wb')
-pickle.dump(dictionary, file)
-file.close()
+if not os.path.exists('dictionary_file.pkl'):
+    dictionary = {}
+    with open('dictionary_file.pkl', 'wb') as file:
+        pickle.dump(dictionary, file)
 
 
 execute_clear_dictionary = APScheduler()
@@ -29,10 +28,10 @@ def post_page():
 # PUT
 @app.route("/put_elements")
 def add_put_elements():
-    dictionary = {}
-    file = open("dictionary_file.pkl", 'wb')
-    pickle.dump(dictionary, file)
-    file.close()
+    # dictionary = {}
+    # file = open("dictionary_file.pkl", 'wb')
+    # pickle.dump(dictionary, file)
+    # file.close()
     return render_template("/put_elements.html")
 
 # Update Dictionary
@@ -103,7 +102,7 @@ def delete_element():
     file.close()
     key = request.form["entry1"]
 
-    if key in dictionary.key():
+    if key in dictionary:
         del dictionary[key]
         file = open("dictionary_file.pkl", 'wb')
         pickle.dump(dictionary, file)
@@ -114,11 +113,15 @@ def delete_element():
         return render_template("/error.html")
     
 def clear_dictionary():
-    os.remove("dictionary_file.pkl")
+    try:
+        if os.path.exists("dictionary_file.pkl"):
+            os.remove("dictionary_file.pkl")
+    except Exception as e:
+        print(f"Error deleting pickle file: {e}")
+
     dictionary = {}
-    file = open("dictionary_file.pkl", 'wb')
-    pickle.dump(dictionary, file)
-    file.close()
+    with open("dictionary_file.pkl", 'wb') as file:
+        pickle.dump(dictionary, file)
 
 # Path to the Brady's Farm website folder
 # Path to the Brady's Farm website folder
@@ -141,33 +144,43 @@ def generate_animals_html(dictionary):
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brady's Farm Animals</title>
-    <style>
-        body { background-color: black; color: white; font-family: Arial, sans-serif; }
-        .animal { border: 1px solid white; padding: 10px; margin: 10px; }
-        img { max-width: 200px; height: auto; }
-    </style>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
+    <main>
+        <img id="mainLogo" src="images/Black Retro Animal Farm Logo.jpg">
+    </main>
     <h1>Brady's Farm Animals</h1>
 """
 
     # Loop through each animal in the list
     for item in animals:
         html_content += f"""
-    <div class="animal">
-        <img src="{item['image']}" alt="{item['name']}"><br>
-        <strong>Name:</strong> {item['name']}<br>
-        <strong>Breed:</strong> {item['breed']}<br>
-        <strong>Age:</strong> {item['age']}<br>
-        <strong>Pedigree:</strong> {item['pedigree']}<br>
-        <strong>Description:</strong> {item['description']}<br>
+    <div id="item-container">
+        <div class="item">
+            <img src="../CRUD_FLASK/static/uploads/{item['image']}" alt="{item['name']}"><br>
+            <strong>Name:</strong> {item['name']}<br>
+            <strong>Breed:</strong> {item['breed']}<br>
+            <strong>Age:</strong> {item['age']}<br>
+            <strong>Pedigree:</strong> {item['pedigree']}<br>
+            <strong>Description:</strong> {item['description']}<br>
+        </div>
     </div>
-    <hr>
+        <hr>
 """
 
     # Close HTML tags
     html_content += """
+        <footer>
+            <nav>
+                <ul>
+                    <li><b><a href="index.html">Home</a></b></li>
+                    <li><b><a href="page2.html">page 2</a></b></li>
+                </ul>
+            </nav>
+        </footer>
 </body>
 </html>
 """
@@ -180,6 +193,6 @@ def generate_animals_html(dictionary):
     
 
 if __name__== '__main__':
-    execute_clear_dictionary.add_job(id = 'Scheduled Task', func=clear_dictionary, trigger="interval", seconds=300)
+    # execute_clear_dictionary.add_job(id = 'Scheduled Task', func=clear_dictionary, trigger="interval", seconds=300)
     execute_clear_dictionary.start()
     app.run(host="0.0.0.0", debug=True, port=5000)
