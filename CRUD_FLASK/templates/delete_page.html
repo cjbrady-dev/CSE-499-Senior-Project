@@ -35,14 +35,12 @@
 
  <p> dictionary: {{retrieve_dictionary}} </p>
 
-        <form action="{{url_for('delete_element')}}", method="post">
-            <center> 
-                <label for="entry1">Enter Key:</label>
-                <input type="text" name="entry1"> 
-                        
-                <input type="submit" value="Submit">
-            </center>
+        <form action="/delete_element" method="post">
+            <label for="entry1">Enter animal name to delete:</label>
+            <input type="text" name="entry1" id="entry1" required>
+            <button type="submit">Delete</button>
         </form>
+
                 
                 <br>
                 <br>

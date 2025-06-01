@@ -26,13 +26,46 @@ def post_page():
     return render_template("/post_elements.html")
 
 # PUT
-@app.route("/put_elements")
+@app.route("/put_elements", methods=["GET", "POST"])
 def add_put_elements():
-    # dictionary = {}
-    # file = open("dictionary_file.pkl", 'wb')
-    # pickle.dump(dictionary, file)
-    # file.close()
-    return render_template("/put_elements.html")
+    if request.method == "GET":
+        return render_template("/put_elements.html")
+    else:
+        #Load dictionary
+        with open('dictionary_file.pkl', 'rb') as file:
+            dictionary = pickle.load(file)
+
+        key = request.form["entry1"]
+
+        if key in dictionary:
+            #Get new form fields
+            new_breed = request.form['breed']
+            new_age = request.form['age']
+            new_pedigree = request.form['pedigree']
+            new_description = request.form['description']
+            file = request.files.get('image')
+
+            #Update image if a new one is uploaded
+            if file and file.filename != '':
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                dictionary[key]['image'] = filename # Only update image if provided
+
+            # Update other item fields
+            dictionary[key]['breed'] = new_breed
+            dictionary[key]['age'] = new_age
+            dictionary[key]['pedigree'] = new_pedigree
+            dictionary[key]['description'] = new_description
+
+            # Save updated dictionary
+            with open('dictionary_file.pkl', 'wb') as file:
+                pickle.dump(dictionary, file)
+
+            generate_animals_html(dictionary)
+            
+            return render_template("/success.html")
+        else:
+            return render_template("error.html")
 
 # Update Dictionary
 @app.route("/success", methods=['POST'])
@@ -97,17 +130,21 @@ def the_delete_page():
 
 @app.route("/delete_element", methods=['POST'])
 def delete_element():
-    file = open('dictionary_file.pkl', 'rb')
-    dictionary = pickle.load(file)
-    file.close()
+    #Load dictionary
+    with open('dictionary_file.pkl', 'rb') as file:
+        dictionary = pickle.load(file)
+
     key = request.form["entry1"]
 
     if key in dictionary:
         del dictionary[key]
-        file = open("dictionary_file.pkl", 'wb')
-        pickle.dump(dictionary, file)
-        file.close()
-        time.sleep(1)
+
+        #save updated dictionary
+        with open("dictionary_file.pkl", 'wb') as file:
+            pickle.dump(dictionary, file)
+
+            generate_animals_html(dictionary)
+
         return render_template("/delete_success.html")
     else:
         return render_template("/error.html")
@@ -123,7 +160,7 @@ def clear_dictionary():
     with open("dictionary_file.pkl", 'wb') as file:
         pickle.dump(dictionary, file)
 
-# Path to the Brady's Farm website folder
+
 # Path to the Brady's Farm website folder
 def generate_animals_html(dictionary):
     output_folder = os.path.join("..", "Brady's Farm")
@@ -168,6 +205,15 @@ def generate_animals_html(dictionary):
             <strong>Description:</strong> {item['description']}<br>
         </div>
     </div>
+    <div>
+        <button onclick="emailFunction()">Message Owner?</button>
+        <script>
+            emailFunction(){
+                document.
+            }
+        </script>
+    </div>
+
         <hr>
 """
 
