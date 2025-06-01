@@ -4,22 +4,22 @@
 **Email: bra16046@byu.edu**  
 **Phone: 2082524420**  
 **Project Title: Senior Project**  
-**Team Members (if applicable): Myself**  
+**Team Members: Myself**  
 **Project Description: Creaiting Farm website to market farm animals available for sale, allows clients to contact farmer for purchase of animals**  
-**Technologies Used: HTML, CSS, JAVASCRIPT (currently)**  
-**GitHub URL: https://github.com/cjbrady-dev/CSE-499-Senior-Project.git** 
+**Technologies Used: HTML, CSS, JAVASCRIPT, Python, Flask, Crudd App**  
+**GitHub URL: https://github.com/cjbrady-dev/CSE-499-Senior-Project/blob/main/statusReports/week6** 
 
 ---
 
 ## Week 6: 5/31/25
-- **Overall Status:** (on-schedule, behind, ahead)
-- **Number of hours worked this week:**
-- **Total number of hours worked on the project thus far:**
-- **Number of total hours anticipated at completion:**
-- **Accomplishments:**
-- **Challenges:**
-- **Plans / Goals for next week:**
-- **SPED Talk Insight:**
+- **Overall Status: Behind**
+- **Number of hours worked this week: 3**
+- **Total number of hours worked on the project thus far: 45**
+- **Number of total hours anticipated at completion: 81**
+- **Accomplishments: Was able to get the crud app to delete items off the website and in the app itself. Started working on making an email option per animal item on the website**
+- **Challenges: Getting the crud app to delete animal items off the website and in the app.**
+- **Plans / Goals for next week: Get email button added to each animal item on the website**
+- **SPED Talk Insight: I listened to Emily's video and I did not learn to much more that I was not aware of with authentication but it is always nice to have a refresher on the subject.**
 - **Other comments for the instructor:**
 
 ---

@@ -23,28 +23,28 @@
         <center> <text> Enter Object Data Below </text> </center>
         <br>
 
-        <form action="{{url_for('success')}}", method="post">
-            <center> 
-                <label for="entry1">Enter Key:</label>
-                <input type="text" name="entry1"> 
-                
-                <br>
-                <br>
+        <form action="/put_elements" method="POST" enctype="multipart/form-data">
+            <label>Animal Name:</label>
+            <input type="text" name="entry1" placeholder="Name of animal to update"><br>
 
-                <label for="entry2">Enter Value:</label>
-                <input type="text" name="entry2"> 
-                
-                <br>
-                <br>
+            <label>New Breed:</label>
+            <input type="text" name="breed"><br>
 
-                <input type="submit" value="Submit">
+            <label>New Age:</label>
+            <input type="text" name="age"><br>
 
-            </center>
+            <label>New Pedigree:</label>
+            <input type="text" name="pedigree"><br>
 
-            <br>
-            <br>
+            <label>New Description:</label>
+            <input type="text" name="description"><br>
 
+            <label>New Image (optional):</label>
+            <input type="file" name="image"><br>
+
+            <input type="submit" value="Update">
         </form>
+
 
         <center> <button onclick="window.location.replace('/')">Return to Home Page</button> </center>
     </body>
