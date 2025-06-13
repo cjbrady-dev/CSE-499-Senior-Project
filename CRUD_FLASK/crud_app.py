@@ -205,14 +205,7 @@ def generate_animals_html(dictionary):
             <strong>Description:</strong> {item['description']}<br>
         </div>
     </div>
-    <div>
-        <button onclick="emailFunction()">Message Owner?</button>
-        <script>
-            emailFunction(){
-                document.
-            }
-        </script>
-    </div>
+
 
         <hr>
 """
