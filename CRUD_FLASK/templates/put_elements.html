@@ -9,41 +9,71 @@
 
     <style>
         html {
-            color: white;
             background-color: black;
+            color: white;
         }
 
         text {
-            font-size: 24px;
+            font-size: 40px;
+            word-wrap: break-word;
+            width: 50px;
+
         }
+        body {
+            text-align: center;
+        }
+        input, textarea {
+            margin: 8px;
+            font-size: px;
+        }
+        p{
+            color: aqua;
+        }
+
     </style>
 
     <body>
-        <center> <h1> CRUD Application </h1></center>
-        <center> <text> Enter Object Data Below </text> </center>
+        <h1> CRUD Application </h1>
+        <text> Update item </text> 
+
         <br>
 
-        <form action="/put_elements" method="POST" enctype="multipart/form-data">
-            <label>Animal Name:</label>
-            <input type="text" name="entry1" placeholder="Name of animal to update"><br>
+        <p>To target the item that needs to be updated enter the animal name in the "Name" field.</p>
 
-            <label>New Breed:</label>
-            <input type="text" name="breed"><br>
+        <br>
+        
 
-            <label>New Age:</label>
-            <input type="text" name="age"><br>
+            <form action="/put_elements" method="POST" enctype="multipart/form-data">
 
-            <label>New Pedigree:</label>
-            <input type="text" name="pedigree"><br>
+                 
 
-            <label>New Description:</label>
-            <input type="text" name="description"><br>
+                <label>Name:</label>
+                <textarea type="text" rows="2" cols="20" name="entry1" wrap="hard" placeholder="Enter Name here."></textarea>
+                <br>
 
-            <label>New Image (optional):</label>
-            <input type="file" name="image"><br>
+                <label>Update Breed:</label>
+                <textarea type="text" rows="2" cols="20" name="breed" wrap="hard" placeholder="Enter breed here."></textarea><br>
 
-            <input type="submit" value="Update">
-        </form>
+                <label>Update Age:</label>
+                <textarea type="text" rows="2" cols="20" name="age" wrap="hard" placeholder="Enter age here."></textarea><br>
+
+                <label>Update Pedigree:</label>
+                <textarea type="text" rows="2" cols="20" name="pedigree" wrap="hard" placeholder="Enter pedigree here."></textarea><br>
+
+                <label>Update Description:</label>
+                <textarea type="text" rows="2" cols="20" name="description" wrap="hard" placeholder="Enter description here."></textarea><br>
+                
+                <br>
+
+                <label>Image:</label>
+                <input type="file" name="image"><br>
+
+                <br>
+
+                <input type="submit" value="Update">
+            </form>
+        <br>
+      
 
 
         <center> <button onclick="window.location.replace('/')">Return to Home Page</button> </center>

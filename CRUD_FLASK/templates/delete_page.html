@@ -15,6 +15,16 @@
 
         text {
             font-size: 24px;
+            color: aqua;
+        }
+        body {
+            text-align: center;
+        }
+        .center-list {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
     </style>
 
@@ -27,13 +37,26 @@
 
         <center>
             <text>
-                Enter a dictionary key to be deleted
+                Enter Name to be delete item
             </text>
         </center>
 
         <br>
 
- <p> dictionary: {{retrieve_dictionary}} </p>
+        <div class="center-list">
+            <ul>
+                {% for name, info in retrieve_dictionary.items() %}
+                    <li>
+                        <strong>{{ name }}</strong>
+                        <ul>
+                            {% for key, value in info.items() %}
+                                <li>{{ key.capitalize() }}: {{value }}</li>
+                                {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
 
         <form action="/delete_element" method="post">
             <label for="entry1">Enter animal name to delete:</label>
