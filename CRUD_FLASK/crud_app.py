@@ -45,11 +45,15 @@ def add_put_elements():
             new_description = request.form['description']
             file = request.files.get('image')
 
-            #Update image if a new one is uploaded
-            if file and file.filename != '':
-                filename = secure_filename(file.filename)
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                dictionary[key]['image'] = filename # Only update image if provided
+        files = request.files.getlist('image')
+        if files:
+            # make sure we have a list to append to
+            dictionary[key].setdefault('images', [])
+            for file in files:
+                if file and file.filename:
+                    filename = secure_filename(file.filename)
+                    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                    dictionary[key]['images'].append(filename)
 
             # Update other item fields
             dictionary[key]['breed'] = new_breed
@@ -82,19 +86,34 @@ def success():
     description = request.form['description']
 
     #Handle image file(s)
-    file = request.files.get('image')
+    image_files = request.files.getlist('image')
+    image_filenames = []
 
-    if file and file.filename != '':
-    #Handle no file uploaded case
-        filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    else:
-        filename = None
+    for file in image_files:
+            if file and file.filename != '':
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                image_filenames.append(filename)
+    
+    #Handle video(s)
+    video_files = request.files.getlist('video')
+    video_filenames = []
+
+    for file in video_files:
+        if file and file.filename != '':
+            ext = os.path.splitext(file.filename)[1].lower()
+            if ext in {'.mp4', '.webm', '.ogg'}:
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                video_filenames.append(filename)
+            else:
+                pass
 
 
     #Save all data including image filename
     dictionary[name] = {
-        'image': filename,
+        'image': image_filenames,
+        'videos': video_filenames,
         'name': name,
         'breed': breed,
         'age': age,
@@ -162,20 +181,18 @@ def clear_dictionary():
 
 
 # Path to the Brady's Farm website folder
+# ---------------------------------------------
+#  HTML generator – shows *all* images & videos
+# ---------------------------------------------
 def generate_animals_html(dictionary):
     output_folder = os.path.join("..", "Brady's Farm")
-    output_path = os.path.join(output_folder, "page2.html")
+    output_path   = os.path.join(output_folder, "page2.html")
 
-    # Make sure folder exists
     os.makedirs(output_folder, exist_ok=True)
 
-    # Convert dictionary to list if needed
-    if isinstance(dictionary, dict):
-        animals = list(dictionary.values())
-    else:
-        animals = dictionary
+    # Convert to a list of animal dicts
+    animals = list(dictionary.values()) if isinstance(dictionary, dict) else dictionary
 
-    # Start of HTML content
     html_content = """
 <!DOCTYPE html>
 <html lang="en">
@@ -183,52 +200,61 @@ def generate_animals_html(dictionary):
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brady's Farm Animals</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
+
 </head>
 <body>
-    <main>
-        <img id="mainLogo" src="images/Black Retro Animal Farm Logo.jpg">
-    </main>
-    <h1>Brady's Farm Animals</h1>
-"""
+    <main><img id="mainLogo" src="images/IMG_3418.JPEG" alt="Logo"></main>
+    <h1 style="text-align:center;">Brady's Farm Animals</h1>
 
-    # Loop through each animal in the list
-    for item in animals:
+    <div id="wrap">
+"""
+    # ---- LOOP THROUGH ANIMALS ----
+    for a in animals:
+        html_content += f"""      <div class="card">
+        """
+
+        # ---- IMAGES ----
+        for img in a.get("images", []):                      # expect list
+            html_content += f'<img src="../CRUD_FLASK/static/uploads/{img}" alt="{a["name"]}">\n        '
+
+        # ---- VIDEOS ----
+        for vid in a.get("videos", []):                      # expect list
+            html_content += (
+                f'<video controls>\n'
+                f'  <source src="../CRUD_FLASK/static/uploads/{vid}">\n'
+                f'  Your browser does not support the video tag.\n'
+                f'</video>\n        '
+            )
+
+        # ---- TEXT FIELDS ----
         html_content += f"""
-    <div id="item-container">
-        <div class="item">
-            <img src="../CRUD_FLASK/static/uploads/{item['image']}" alt="{item['name']}"><br>
-            <strong>Name:</strong> {item['name']}<br>
-            <strong>Breed:</strong> {item['breed']}<br>
-            <strong>Age:</strong> {item['age']}<br>
-            <strong>Pedigree:</strong> {item['pedigree']}<br>
-            <strong>Description:</strong> {item['description']}<br>
-        </div>
-    </div>
-
-
-        <hr>
+        <h3>{a['name']}</h3>
+        <p><strong>Breed:</strong> {a['breed']}</p>
+        <p><strong>Age:</strong> {a['age']}</p>
+        <p><strong>Pedigree:</strong> {a['pedigree']}</p>
+        <p><strong>Description:</strong> {a['description']}</p>
+      </div>
 """
 
-    # Close HTML tags
+    # ---- FOOTER ----
     html_content += """
-        <footer>
-            <nav>
-                <ul>
-                    <li><b><a href="index.html">Home</a></b></li>
-                    <li><b><a href="page2.html">page 2</a></b></li>
-                </ul>
-            </nav>
-        </footer>
+    </div><!-- /wrap -->
+
+    <footer style="text-align:center; margin-top:40px;">
+        <nav>
+            <a href="index.html">Home</a> |
+            <a href="page2.html">Page&nbsp;2</a>
+        </nav>
+    </footer>
 </body>
 </html>
 """
 
-    # Write to file
-    with open(output_path, "w", encoding="utf-8") as f:
+    with open(output_path, "w", encoding="utf‑8") as f:
         f.write(html_content)
-
     print(f"HTML written to {output_path}")
+
     
 
 if __name__== '__main__':
