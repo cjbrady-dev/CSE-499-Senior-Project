@@ -15,13 +15,15 @@
     </style>
 </head>
 <body>
-    <center><h1>Brady's Stock Dogsy</h1></center>
+    <center><h1>Brady's Stock Dogs</h1></center>
 
     <div style="display: flex; flex-wrap: wrap; justify-content: center;">
         {% for animal in retrieve_dictionary.values() %}
         <div class="animal-card">
             {% if animal.image %}
-                <img src="{{ url_for('static', filename='uploads/' + animal.image) }}" alt="{{ animal.name }}">
+                {% for img in animal.image %}
+                    <img src="{{ url_for('static', filename='uploads/' + img) }}" alt="{{ animal.name }}">
+                {% endfor %}
             {% endif %}
             <h3>{{ animal.name }}</h3>
             <p><strong>Breed:</strong> {{ animal.breed }}</p>

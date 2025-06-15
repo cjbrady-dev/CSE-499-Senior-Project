@@ -5,35 +5,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brady's Farm Animals</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body   { background:#000; color:#fff; font-family:sans-serif; }
+        .card  { width:300px; margin:14px; padding:10px; background:#222;
+                 border:1px solid #555; border-radius:10px; }
+        .card img, .card video { max-width:100%; border-radius:5px; margin-top:6px; }
+        #wrap  { display:flex; flex-wrap:wrap; justify-content:center; }
+    </style>
 </head>
 <body>
-    <main>
-        <img id="mainLogo" src="images/Black Retro Animal Farm Logo.jpg">
-    </main>
-    <h1>Brady's Farm Animals</h1>
+    <main><img id="mainLogo" src="images/IMG_3418.JPEG" alt="Logo"></main>
+    <h1 style="text-align:center;">Brady's Farm Animals</h1>
 
-    <div id="item-container">
-        <div class="item">
-            <img src="../CRUD_FLASK/static/uploads/wilbur.jpg" alt="James"><br>
-            <strong>Name:</strong> James<br>
-            <strong>Breed:</strong> LOL<br>
-            <strong>Age:</strong> 60<br>
-            <strong>Pedigree:</strong> hahaha<br>
-            <strong>Description:</strong> HI<br>
-        </div>
-    </div>
+    <div id="wrap">
+      <div class="card">
+        
+        <h3>James</h3>
+        <p><strong>Breed:</strong> LOL</p>
+        <p><strong>Age:</strong> 60</p>
+        <p><strong>Pedigree:</strong> hahaha</p>
+        <p><strong>Description:</strong> HI</p>
+      </div>
+      <div class="card">
+        
+        <h3>Ripper</h3>
+        <p><strong>Breed:</strong> Bordercollie</p>
+        <p><strong>Age:</strong> 2</p>
+        <p><strong>Pedigree:</strong> Unkown</p>
+        <p><strong>Description:</strong> Killer!</p>
+      </div>
+      <div class="card">
+        <video controls>
+  <source src="../CRUD_FLASK/static/uploads/Recording_7.mp4">
+  Your browser does not support the video tag.
+</video>
+        
+        <h3>Willy</h3>
+        <p><strong>Breed:</strong> Bordercollie</p>
+        <p><strong>Age:</strong> 5</p>
+        <p><strong>Pedigree:</strong> lol</p>
+        <p><strong>Description:</strong> heck ya</p>
+      </div>
 
+    </div><!-- /wrap -->
 
-        <hr>
-
-        <footer>
-            <nav>
-                <ul>
-                    <li><b><a href="index.html">Home</a></b></li>
-                    <li><b><a href="page2.html">page 2</a></b></li>
-                </ul>
-            </nav>
-        </footer>
+    <footer style="text-align:center; margin-top:40px;">
+        <nav>
+            <a href="index.html">Home</a> |
+            <a href="page2.html">Page&nbsp;2</a>
+        </nav>
+    </footer>
 </body>
 </html>
