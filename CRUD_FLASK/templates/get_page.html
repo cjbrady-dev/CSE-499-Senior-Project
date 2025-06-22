@@ -4,13 +4,43 @@
     <meta charset="utf-8">
     <title>Brady's Stock Dogs</title>
     <style>
-        html { color: white; background-color: black; font-family: sans-serif; }
-        .animal-card {
-            border: 1px solid #ccc; padding: 10px; margin: 10px; width: 300px;
-            background-color: #222; border-radius: 10px;
+        html {
+            color: white;
+            background-color: black;
+            font-family: sans-serif;
         }
+
+        .animal-card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            width: 320px;
+            background-color: #222;
+            border-radius: 10px;
+        }
+
         .animal-card img {
-            max-width: 100%; height: auto; border-radius: 5px;
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .carousel-btn {
+            background-color: #444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .carousel-btn:hover {
+            background-color: #666;
+        }
+
+        .carousel-container {
+            text-align: center;
         }
     </style>
 </head>
@@ -21,9 +51,35 @@
         {% for animal in retrieve_dictionary.values() %}
         <div class="animal-card">
             {% if animal.image %}
-                {% for img in animal.image %}
-                    <img src="{{ url_for('static', filename='uploads/' + img) }}" alt="{{ animal.name }}">
-                {% endfor %}
+                <div class="carousel-container">
+                    <img id="image-{{ loop.index }}" src="{{ url_for('static', filename='uploads/' + animal.image[0]) }}" alt="{{ animal.name }}">
+                    <br>
+                    <button class="carousel-btn" onclick="prevImage({{ loop.index }})">Prev</button>
+                    <button class="carousel-btn" onclick="nextImage({{ loop.index }})">Next</button>
+                </div>
+                <script>
+                    const images{{ loop.index }} = {{ animal.image|tojson }};
+                    let index{{ loop.index }} = 0;
+
+                    function showImage{{ loop.index }}() {
+                        const img = document.getElementById("image-{{ loop.index }}");
+                        img.src = "/static/uploads/" + images{{ loop.index }}[index{{ loop.index }}];
+                    }
+
+                    function nextImage(cardIndex) {
+                        if (cardIndex === {{ loop.index }}) {
+                            index{{ loop.index }} = (index{{ loop.index }} + 1) % images{{ loop.index }}.length;
+                            showImage{{ loop.index }}();
+                        }
+                    }
+
+                    function prevImage(cardIndex) {
+                        if (cardIndex === {{ loop.index }}) {
+                            index{{ loop.index }} = (index{{ loop.index }} - 1 + images{{ loop.index }}.length) % images{{ loop.index }}.length;
+                            showImage{{ loop.index }}();
+                        }
+                    }
+                </script>
             {% endif %}
             <h3>{{ animal.name }}</h3>
             <p><strong>Breed:</strong> {{ animal.breed }}</p>

@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import pickle, time, os
 from flask_apscheduler import APScheduler
 from werkzeug.utils import secure_filename
+from jinja2 import Environment, FileSystemLoader
 
 app = Flask(__name__)
 UPLOAD_FOLDER = 'static/uploads'
@@ -180,83 +181,29 @@ def clear_dictionary():
         pickle.dump(dictionary, file)
 
 
-# Path to the Brady's Farm website folder
-# ---------------------------------------------
 #  HTML generator – shows *all* images & videos
-# ---------------------------------------------
 def generate_animals_html(dictionary):
+    # Step 1: Set up output file path
     output_folder = os.path.join("..", "Brady's Farm")
-    output_path   = os.path.join(output_folder, "page2.html")
-
+    output_path = os.path.join(output_folder, "page2.html")
     os.makedirs(output_folder, exist_ok=True)
 
-    # Convert to a list of animal dicts
+    # Step 2: Prepare animal list
     animals = list(dictionary.values()) if isinstance(dictionary, dict) else dictionary
 
-    html_content = """
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brady's Farm Animals</title>
-    <link rel="stylesheet" href="styles.css">
+    # Step 3: Load Jinja2 environment and template
+    env = Environment(loader=FileSystemLoader("templates/"))
+    template = env.get_template("animal_template.html")
 
-</head>
-<body>
-    <main><img id="mainLogo" src="images/IMG_3418.JPEG" alt="Logo"></main>
-    <h1 style="text-align:center;">Brady's Farm Animals</h1>
+    # Step 4: Render HTML using template and data
+    rendered_html = render_template("animal_template.html", animals=animals)
 
-    <div id="wrap">
-"""
-    # ---- LOOP THROUGH ANIMALS ----
-    for a in animals:
-        html_content += f"""      <div class="card">
-        """
+    # Step 5: Write output to file
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write(rendered_html)
 
-        # ---- IMAGES ----
-        for img in a.get("images", []):                      # expect list
-            html_content += f'<img src="../CRUD_FLASK/static/uploads/{img}" alt="{a["name"]}">\n        '
-
-        # ---- VIDEOS ----
-        for vid in a.get("videos", []):                      # expect list
-            html_content += (
-                f'<video controls>\n'
-                f'  <source src="../CRUD_FLASK/static/uploads/{vid}">\n'
-                f'  Your browser does not support the video tag.\n'
-                f'</video>\n        '
-            )
-
-        # ---- TEXT FIELDS ----
-        html_content += f"""
-        <h3>{a['name']}</h3>
-        <p><strong>Breed:</strong> {a['breed']}</p>
-        <p><strong>Age:</strong> {a['age']}</p>
-        <p><strong>Pedigree:</strong> {a['pedigree']}</p>
-        <p><strong>Description:</strong> {a['description']}</p>
-      </div>
-"""
-
-    # ---- FOOTER ----
-    html_content += """
-    </div><!-- /wrap -->
-
-    <footer style="text-align:center; margin-top:40px;">
-        <nav>
-            <a href="index.html">Home</a> |
-            <a href="page2.html">Page&nbsp;2</a>
-        </nav>
-    </footer>
-</body>
-</html>
-"""
-
-    with open(output_path, "w", encoding="utf‑8") as f:
-        f.write(html_content)
-    print(f"HTML written to {output_path}")
 
     
-
 if __name__== '__main__':
     # execute_clear_dictionary.add_job(id = 'Scheduled Task', func=clear_dictionary, trigger="interval", seconds=300)
     execute_clear_dictionary.start()
