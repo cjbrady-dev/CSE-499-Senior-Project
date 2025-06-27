@@ -113,7 +113,7 @@ def success():
 
     #Save all data including image filename
     dictionary[name] = {
-        'image': image_filenames,
+        'images': image_filenames,
         'videos': video_filenames,
         'name': name,
         'breed': breed,
@@ -183,24 +183,20 @@ def clear_dictionary():
 
 #  HTML generator – shows *all* images & videos
 def generate_animals_html(dictionary):
-    # Step 1: Set up output file path
-    output_folder = os.path.join("..", "Brady's Farm")
-    output_path = os.path.join(output_folder, "page2.html")
-    os.makedirs(output_folder, exist_ok=True)
+    from flask import current_app
 
-    # Step 2: Prepare animal list
-    animals = list(dictionary.values()) if isinstance(dictionary, dict) else dictionary
+   
+    with current_app.app_context():
+        output_folder = os.path.join("..", "Brady's Farm")
+        output_path = os.path.join(output_folder, "page2.html")
+        os.makedirs(output_folder, exist_ok=True)
 
-    # Step 3: Load Jinja2 environment and template
-    env = Environment(loader=FileSystemLoader("templates/"))
-    template = env.get_template("animal_template.html")
+        animals = list(dictionary.values()) if isinstance(dictionary, dict) else dictionary
 
-    # Step 4: Render HTML using template and data
-    rendered_html = render_template("animal_template.html", animals=animals)
+        rendered_html = render_template("animal_template.html", animals=animals)
 
-    # Step 5: Write output to file
-    with open(output_path, "w", encoding="utf-8") as f:
-        f.write(rendered_html)
+        with open(output_path, "w", encoding="utf-8") as f:
+            f.write(rendered_html)
 
 
     

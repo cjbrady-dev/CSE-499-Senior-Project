@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Brady's Farm Animals</title>
 
-    <!-- Use Flask's url_for to link to static files -->
-    <link rel="stylesheet" href="../../Brady's Farm/styles.css">
-    <script src="../../Brady's Farm/main.js" defer></script>
+    <link rel="stylesheet" href="../Brady's Farm/styles.css">
+    <script src="../Brady's Farm/main.js" defer></script>
 </head>
-<body>Brady's Farm\main.js
+<body>
     <div class="logo-container">
-        <img src="../../Brady's Farm/images/IMG_3418.JPEG" alt="Brady's Farm Logo">
+        <img src="../Brady's Farm/images/IMG_3418.JPEG" alt="Brady's Farm Logo">
     </div>
 
     <h1>Brady's Farm Animals</h1>
@@ -24,10 +23,10 @@
             {% set ext = item.rsplit('.', 1)[-1].lower() %}
             {% set active = 'active' if loop.index0 == 0 else '' %}
             {% if ext in ['jpg', 'jpeg', 'png', 'gif', 'webp'] %}
-                <img src="static/uploads/{{ item }}" class="{{ active }}" alt="{{ a.name }}">
+                <img src="../CRUD_FLASK/static/uploads/{{ item }}" class="{{ active }}" alt="{{ a.name }}">
             {% elif ext in ['mp4', 'webm', 'ogg'] %}
                 <video class="{{ active }}" controls>
-                    <source src="static/uploads/{{ item }}" type="video/{{ ext }}">
+                    <source src="../CRUD_FLASK/static/uploads/{{ item }}" type="video/{{ ext }}">
                     Your browser does not support the video tag.
                 </video>
             {% endif %}
@@ -47,11 +46,10 @@
 </div>
 {% endfor %}
 
-
     <footer>
         <nav>
             <ul>
-                <li><b><a href="../../Brady's Farm/index.html">Home</a></b></li>
+                <li><b><a href="../Brady's Farm/index.html">Home</a></b></li>
             </ul>
         </nav>
     </footer>
