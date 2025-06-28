@@ -4,6 +4,7 @@ from flask_apscheduler import APScheduler
 from werkzeug.utils import secure_filename
 from jinja2 import Environment, FileSystemLoader
 
+
 app = Flask(__name__)
 UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -181,6 +182,7 @@ def clear_dictionary():
         pickle.dump(dictionary, file)
 
 
+<<<<<<< HEAD
 #  HTML generator – shows *all* images & videos
 def generate_animals_html(dictionary):
     from flask import current_app
@@ -200,6 +202,25 @@ def generate_animals_html(dictionary):
 
 
     
+
+def generate_animals_html(dictionary):
+    from flask import current_app
+
+   
+    with current_app.app_context():
+        output_folder = os.path.join("..", "Brady's Farm")
+        output_path = os.path.join(output_folder, "page2.html")
+        os.makedirs(output_folder, exist_ok=True)
+
+        animals = list(dictionary.values()) if isinstance(dictionary, dict) else dictionary
+
+        rendered_html = render_template("animal_template.html", animals=animals)
+
+        with open(output_path, "w", encoding="utf-8") as f:
+            f.write(rendered_html)
+
+    
+
 if __name__== '__main__':
     # execute_clear_dictionary.add_job(id = 'Scheduled Task', func=clear_dictionary, trigger="interval", seconds=300)
     execute_clear_dictionary.start()
