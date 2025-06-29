@@ -6,20 +6,20 @@
 **Project Title: Senior Project**  
 **Team Members (if applicable): Myself**  
 **Project Description: Creaiting Farm website to market farm animals available for sale, allows clients to contact farmer for purchase of animals**  
-**Technologies Used: HTML, CSS, JAVASCRIPT (currently)**  
-**GitHub URL: https://github.com/cjbrady-dev/CSE-499-Senior-Project.git** 
+**Technologies Used: HTML, CSS, JAVASCRIPT, python, FLASK, CRUD**  
+**GitHub URL: https://github.com/cjbrady-dev/CSE-499-Senior-Project/blob/main/statusReports/week10** 
 
 ---
 
 ## Week 10: 6/28/25
-- **Overall Status:** (on-schedule, behind, ahead)
-- **Number of hours worked this week:**
-- **Total number of hours worked on the project thus far:**
-- **Number of total hours anticipated at completion:**
-- **Accomplishments:**
-- **Challenges:**
-- **Plans / Goals for next week:**
-- **SPED Talk Insight:**
+- **Overall Status:behind**
+- **Number of hours worked this week:8**
+- **Total number of hours worked on the project thus far:77**
+- **Number of total hours anticipated at completion:49**
+- **Accomplishments:Fixed refactoring, and github sorage errors. Should now be able to proceed as normal. Also able to cycle through photos and videos per animal item.**
+- **Challenges: solving github storage limit errors.**
+- **Plans / Goals for next week: catch up on time. Fix formatting of the project, make the crud app cycle through photos and videos. Will need to work on website security soon as well.**
+- **SPED Talk Insight:N/A**
 - **Other comments for the instructor:**
 
 ---

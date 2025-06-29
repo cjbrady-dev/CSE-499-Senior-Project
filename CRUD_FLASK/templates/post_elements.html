@@ -2,15 +2,25 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title> Add Animal - CRUD App </title>
+    <title>Add Animal - CRUD App</title>
     <style>
         html {
             background-color: black;
             color: white;
+            font-family: sans-serif;
         }
         input, textarea {
             margin: 8px;
             font-size: 16px;
+            width: 90%;
+            max-width: 400px;
+        }
+        form {
+            text-align: center;
+            margin-top: 30px;
+        }
+        h3 {
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -23,12 +33,16 @@
             <input type="text" name="age" placeholder="Age"><br>
             <input type="text" name="pedigree" placeholder="Pedigree"><br>
             <textarea name="description" placeholder="Description" rows="4" cols="50"></textarea><br>
+
             <h3>Choose photo(s)</h3>
             <input type="file" name="image" accept="image/*" multiple><br>
+
             <h3>Choose video(s)</h3>
             <input type="file" name="video" accept="video/*" multiple><br>
-            <input type="submit" value="Submit">
+
+            <input type="submit" value="Submit" style="margin-top: 20px; padding: 8px 16px;">
         </form>
+
         <br>
         <button onclick="window.location.replace('/')">Return to Home Page</button>
     </center>

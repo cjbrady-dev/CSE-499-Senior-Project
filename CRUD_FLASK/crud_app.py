@@ -2,6 +2,8 @@ from flask import Flask, render_template, request
 import pickle, time, os
 from flask_apscheduler import APScheduler
 from werkzeug.utils import secure_filename
+from jinja2 import Environment, FileSystemLoader
+
 
 app = Flask(__name__)
 UPLOAD_FOLDER = 'static/uploads'
@@ -112,7 +114,7 @@ def success():
 
     #Save all data including image filename
     dictionary[name] = {
-        'image': image_filenames,
+        'images': image_filenames,
         'videos': video_filenames,
         'name': name,
         'breed': breed,
@@ -180,80 +182,42 @@ def clear_dictionary():
         pickle.dump(dictionary, file)
 
 
-# Path to the Brady's Farm website folder
-# ---------------------------------------------
+
 #  HTML generator – shows *all* images & videos
-# ---------------------------------------------
 def generate_animals_html(dictionary):
-    output_folder = os.path.join("..", "Brady's Farm")
-    output_path   = os.path.join(output_folder, "page2.html")
+    from flask import current_app
 
-    os.makedirs(output_folder, exist_ok=True)
+   
+    with current_app.app_context():
+        output_folder = os.path.join("..", "Brady's Farm")
+        output_path = os.path.join(output_folder, "page2.html")
+        os.makedirs(output_folder, exist_ok=True)
 
-    # Convert to a list of animal dicts
-    animals = list(dictionary.values()) if isinstance(dictionary, dict) else dictionary
+        animals = list(dictionary.values()) if isinstance(dictionary, dict) else dictionary
 
-    html_content = """
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brady's Farm Animals</title>
-    <link rel="stylesheet" href="styles.css">
+        rendered_html = render_template("animal_template.html", animals=animals)
 
-</head>
-<body>
-    <main><img id="mainLogo" src="images/IMG_3418.JPEG" alt="Logo"></main>
-    <h1 style="text-align:center;">Brady's Farm Animals</h1>
+        with open(output_path, "w", encoding="utf-8") as f:
+            f.write(rendered_html)
 
-    <div id="wrap">
-"""
-    # ---- LOOP THROUGH ANIMALS ----
-    for a in animals:
-        html_content += f"""      <div class="card">
-        """
 
-        # ---- IMAGES ----
-        for img in a.get("images", []):                      # expect list
-            html_content += f'<img src="../CRUD_FLASK/static/uploads/{img}" alt="{a["name"]}">\n        '
+    
 
-        # ---- VIDEOS ----
-        for vid in a.get("videos", []):                      # expect list
-            html_content += (
-                f'<video controls>\n'
-                f'  <source src="../CRUD_FLASK/static/uploads/{vid}">\n'
-                f'  Your browser does not support the video tag.\n'
-                f'</video>\n        '
-            )
+def generate_animals_html(dictionary):
+    from flask import current_app
 
-        # ---- TEXT FIELDS ----
-        html_content += f"""
-        <h3>{a['name']}</h3>
-        <p><strong>Breed:</strong> {a['breed']}</p>
-        <p><strong>Age:</strong> {a['age']}</p>
-        <p><strong>Pedigree:</strong> {a['pedigree']}</p>
-        <p><strong>Description:</strong> {a['description']}</p>
-      </div>
-"""
+   
+    with current_app.app_context():
+        output_folder = os.path.join("..", "Brady's Farm")
+        output_path = os.path.join(output_folder, "page2.html")
+        os.makedirs(output_folder, exist_ok=True)
 
-    # ---- FOOTER ----
-    html_content += """
-    </div><!-- /wrap -->
+        animals = list(dictionary.values()) if isinstance(dictionary, dict) else dictionary
 
-    <footer style="text-align:center; margin-top:40px;">
-        <nav>
-            <a href="index.html">Home</a> |
-            <a href="page2.html">Page&nbsp;2</a>
-        </nav>
-    </footer>
-</body>
-</html>
-"""
+        rendered_html = render_template("animal_template.html", animals=animals)
 
-    with open(output_path, "w", encoding="utf‑8") as f:
-        f.write(html_content)
-    print(f"HTML written to {output_path}")
+        with open(output_path, "w", encoding="utf-8") as f:
+            f.write(rendered_html)
 
     
 

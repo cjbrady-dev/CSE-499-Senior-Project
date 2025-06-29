@@ -1,41 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 
 :root {
-  /* change the values below to your colors from your palette */
-  --primary-color: #982727;
-  --secondary-color: #000000;
-  --accent1-color: #F5EEEE;
-  --accent2-color: #FFFFFF;
+    /* change the values below to your colors from your palette */
+    --primary-color: #982727;
+    --secondary-color: #000000;
+    --accent1-color: #F5EEEE;
+    --accent2-color: #FFFFFF;
 
-  /* change the values below to your chosen font(s) */
-  --heading-font: "EB Garamond";
-  --paragraph-font: Josefin Sans, Helvetica, sans-serif;
+    /* change the values below to your chosen font(s) */
+    --heading-font: "EB Garamond";
+    --paragraph-font: Josefin Sans, Helvetica, sans-serif;
 
-  /* these colors below should be chosen from among your palette colors above */
-  --headline-color-on-white: var(
-    --primary-color
-  ); /* headlines on a white background */
-  --headline-color-on-color: white; /* headlines on a colored background */
-  --paragraph-color-on-white: var(
-    --primary-color
-  ); /* paragraph text on a white background */
-  --paragraph-color-on-color: white; /* paragraph text on a colored background */
-  --paragraph-background-color: var(--primary-color);
-  --nav-link-color: var(--accent1-color);
-  --nav-background-color: var(--primary-color);
-  --nav-hover-link-color: var(--secondary-color);
-  --nav-hover-background-color: var(--accent1-color);
+    /* these colors below should be chosen from among your palette colors above */
+    --headline-color-on-white: var(--primary-color); /* headlines on a white background */
+    --headline-color-on-color: white; /* headlines on a colored background */
+    --paragraph-color-on-white: var(--primary-color); /* paragraph text on a white background */
+    --paragraph-color-on-color: white; /* paragraph text on a colored background */
+    --paragraph-background-color: var(--primary-color);
+    --nav-link-color: var(--accent1-color);
+    --nav-background-color: var(--primary-color);
+    --nav-hover-link-color: var(--secondary-color);
+    --nav-hover-background-color: var(--accent1-color);
 }
+
 body {
     text-align: center;
     padding: 100px;
 }
+
 nav {
     color: var(--secondary-color);
     background-color: var(--accent1-color);
     text-align: center;
-    border: #000000 solid 1px
+    border: #000000 solid 1px;
 }
+
 header {
     background-color: var(--primary-color);
     text-align: center;
@@ -49,7 +48,6 @@ p {
     color: var(--accent2-color);
     padding: 3px;
     font-size: 28px;
-
 }
 
 main #mainLogo {
@@ -57,8 +55,6 @@ main #mainLogo {
     width: 100% auto;
     text-align: center;
 }
-
-
 
 #item-container {
     display: flex;
@@ -95,117 +91,91 @@ main #mainLogo {
     color: var(--secondary-color);
 }
 
-    nav ul {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-        text-align: center;
-    }
-    nav ul li {
-        display: inline-block;
-        margin-right: 20px; 
-    }
-    nav ul li:last-child {
-        margin-right: 0; 
-    }
-    nav ul li a {
-        text-decoration: none; 
-        color: #333; 
-        padding: 10px 15px; 
-        display: inline-block;
-    }
-
-
-
-@media (min-width: 300px){
-    body {
-        text-align: center;
-        padding: 100px;
-    }
-    nav {
-        color: var(--secondary-color);
-        background-color: var(--accent1-color);
-        text-align: center;
-        border: #000000 solid 1px
-    }
-    header {
-        background-color: var(--primary-color);
-        text-align: center;
-        border: #000000 solid 3px;
-        padding: 10px;
-    }
-    
-    p {
-        background-color: var(--primary-color);
-        border: #000000 solid 3px;
-        color: var(--accent2-color);
-        padding: 3px;
-        font-size: 28px;
-    
-    }
-    
-    main #mainLogo {
-        border: 3px solid var(--secondary-color);
-        width: 100% auto;
-        text-align: center;
-    }
-    
-    
-    
-    #item-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        padding: 20px;
-        color: var(--secondary-color);
-    }
-    
-    .item {
-        background-color: var(--accent1-color);
-        border: 1px solid var(--secondary-color);
-        padding: 10px;
-        width: 100%; /* Three items per row with spacing */
-        box-sizing: border-box;
-    }
-    
-    .item img {
-        max-width: 100%;
-        height: auto;
-    }
-    
-    .item .info {
-        margin-top: 10px;
-    }
-    
-    .item .info h3 {
-        margin: 0;
-        font-size: 18px;
-    }
-    
-    .item .info p {
-        margin: 5px 0;
-        color: var(--secondary-color);
-    }
-    
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            text-align: center;
-        }
-        nav ul li {
-            display: inline-block;
-            margin-right: 20px; 
-        }
-        nav ul li:last-child {
-            margin-right: 0; 
-        }
-        nav ul li a {
-            text-decoration: none; 
-            color: #333; 
-            padding: 10px 15px; 
-            display: inline-block;
-        }
-    
-    
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
 }
+
+nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+nav ul li:last-child {
+    margin-right: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 15px;
+    display: inline-block;
+}
+
+/* --- Carousel Specific Styles --- */
+
+.carousel {
+    position: relative; /* Needed for absolute positioning of children */
+    width: 100%; /* Or a fixed width for your carousel */
+    height: 300px; /* Example fixed height, adjust as needed. Or set max-height, overflow hidden */
+    overflow: hidden; /* Hide anything that's not the active slide */
+    margin: 0 auto; /* Center the carousel */
+    display: flex; /* Helps ensure only one item is displayed */
+    align-items: center; /* Vertically center content if height is fixed */
+    justify-content: center; /* Horizontally center content if width is fixed */
+    background-color: #eee; /* Light background to see the container */
+}
+
+.carousel img,
+.carousel video {
+    display: none; /* Hide all items by default */
+    position: absolute; /* Stack items on top of each other */
+    top: 0;
+    left: 0;
+    width: 100%; /* Make media fill the carousel container */
+    height: 100%; /* Make media fill the carousel container */
+    object-fit: contain; /* Ensure image/video fits within the container without cropping */
+    transition: opacity 0.5s ease-in-out; /* Smooth fade effect */
+    opacity: 0; /* Initially transparent */
+}
+
+.carousel img.active,
+.carousel video.active {
+    display: block; /* Show the active item */
+    position: relative; /* Bring it into normal flow or keep absolute depending on desired stacking */
+    opacity: 1; /* Fully visible */
+}
+
+.carousel-buttons {
+    text-align: center;
+    margin-top: 10px;
+    padding-bottom: 20px; /* Add some space below buttons */
+}
+
+.carousel-buttons button {
+    background-color: var(--primary-color);
+    color: var(--accent2-color);
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.carousel-buttons button:hover {
+    background-color: var(--secondary-color);
+}
+
+/* --- Media Queries (if needed for specific adjustments, not duplicates) --- */
+/* Example: If you wanted item width to change only at a certain breakpoint */
+/*
+@media (min-width: 768px) {
+    .item {
+        width: calc(33.333% - 20px); // Example: 3 items per row on larger screens
+    }
+}
+*/
