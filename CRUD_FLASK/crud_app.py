@@ -182,7 +182,7 @@ def clear_dictionary():
         pickle.dump(dictionary, file)
 
 
-<<<<<<< HEAD
+
 #  HTML generator – shows *all* images & videos
 def generate_animals_html(dictionary):
     from flask import current_app
