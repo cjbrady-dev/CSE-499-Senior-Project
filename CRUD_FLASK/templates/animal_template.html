@@ -5,51 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Brady's Farm Animals</title>
 
-    <link rel="stylesheet" href="../Brady's Farm/styles.css">
-    <script src="../Brady's Farm/main.js" defer></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Brady\'s Farm/styles.css') }}">
+    <script src="{{ url_for('static', filename='Brady\'s Farm/main.js') }}" defer></script>
 </head>
 <body>
     <div class="logo-container">
-        <img src="../Brady's Farm/images/IMG_3418.JPEG" alt="Brady's Farm Logo">
+        <img src="{{ url_for('static', filename='Brady\'s Farm/images/IMG_3418.JPEG') }}" alt="Brady's Farm Logo">
     </div>
 
     <h1>Brady's Farm Animals</h1>
 
-{% for a in animals %}
-<div class="card">
-    <div class="carousel" id="carousel-{{ loop.index0 }}">
-        {% set media = (a.images if a.images else []) + (a.videos if a.videos else []) %}
-        {% for item in media %}
-            {% set ext = item.rsplit('.', 1)[-1].lower() %}
-            {% set active = 'active' if loop.index0 == 0 else '' %}
-            {% if ext in ['jpg', 'jpeg', 'png', 'gif', 'webp'] %}
-                <img src="../CRUD_FLASK/static/uploads/{{ item }}" class="{{ active }}" alt="{{ a.name }}">
-            {% elif ext in ['mp4', 'webm', 'ogg'] %}
-                <video class="{{ active }}" controls>
-                    <source src="../CRUD_FLASK/static/uploads/{{ item }}" type="video/{{ ext }}">
-                    Your browser does not support the video tag.
-                </video>
-            {% endif %}
-        {% endfor %}
-    </div>
+    {% for a in animals %}
+    <div class="card">
+        <div class="carousel" id="carousel-{{ loop.index0 }}">
+            {% set media = (a.images if a.images else []) + (a.videos if a.videos else []) %}
+            {% for item in media %}
+                {% set ext = item.rsplit('.', 1)[-1].lower() %}
+                {% set active = 'active' if loop.index0 == 0 else '' %}
+                {% if ext in ['jpg', 'jpeg', 'png', 'gif', 'webp'] %}
+                    <img src="{{ url_for('static', filename='uploads/' ~ item) }}" class="{{ active }}" alt="{{ a.name }}">
+                {% elif ext in ['mp4', 'webm', 'ogg'] %}
+                    <video class="{{ active }}" controls>
+                        <source src="{{ url_for('static', filename='uploads/' ~ item) }}" type="video/{{ ext }}">
+                        Your browser does not support the video tag.
+                    </video>
+                {% endif %}
+            {% endfor %}
+        </div>
 
-    <div class="carousel-buttons">
-        <button onclick="prevMedia('carousel-{{ loop.index0 }}')">Previous</button>
-        <button onclick="nextMedia('carousel-{{ loop.index0 }}')">Next</button>
-    </div>
+        <div class="carousel-buttons">
+            <button onclick="prevMedia('carousel-{{ loop.index0 }}')">Previous</button>
+            <button onclick="nextMedia('carousel-{{ loop.index0 }}')">Next</button>
+        </div>
 
-    <h3>{{ a.name }}</h3>
-    <p><strong>Breed:</strong> {{ a.breed }}</p>
-    <p><strong>Age:</strong> {{ a.age }}</p>
-    <p><strong>Pedigree:</strong> {{ a.pedigree }}</p>
-    <p><strong>Description:</strong> {{ a.description }}</p>
-</div>
-{% endfor %}
+        <h3>{{ a.name }}</h3>
+        <p><strong>Breed:</strong> {{ a.breed }}</p>
+        <p><strong>Age:</strong> {{ a.age }}</p>
+        <p><strong>Pedigree:</strong> {{ a.pedigree }}</p>
+        <p><strong>Description:</strong> {{ a.description }}</p>
+    </div>
+    {% endfor %}
 
     <footer>
         <nav>
             <ul>
-                <li><b><a href="../Brady's Farm/index.html">Home</a></b></li>
+                <li><b><a href="{{ url_for('static', filename='Brady\'s Farm/index.html') }}">Home</a></b></li>
             </ul>
         </nav>
     </footer>

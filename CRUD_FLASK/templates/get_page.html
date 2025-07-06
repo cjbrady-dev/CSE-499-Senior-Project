@@ -1,95 +1,36 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Brady's Stock Dogs</title>
-    <style>
-        html {
-            color: white;
-            background-color: black;
-            font-family: sans-serif;
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const media_{{ index }} = {{ media | tojson }};
+        let mediaIndex_{{ index }} = 0;
+
+        function renderMedia_{{ index }}() {
+            const container = document.getElementById("media-container-{{ index }}");
+            const file = media_{{ index }}[mediaIndex_{{ index }}];
+            const ext = file.split('.').pop().toLowerCase();
+
+            if (["jpg", "jpeg", "png", "gif", "webp"].includes(ext)) {
+                container.innerHTML = `<img src="/static/uploads/${file}" alt="{{ animal.name }}">`;
+            } else if (["mp4", "webm", "ogg"].includes(ext)) {
+                container.innerHTML = `
+                    <video controls>
+                        <source src="/static/uploads/${file}" type="video/${ext}">
+                        Your browser does not support the video tag.
+                    </video>`;
+            } else {
+                container.innerHTML = `<p>Unsupported format</p>`;
+            }
         }
 
-        .animal-card {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin: 10px;
-            width: 320px;
-            background-color: #222;
-            border-radius: 10px;
+        window.nextMedia_{{ index }} = function () {
+            mediaIndex_{{ index }} = (mediaIndex_{{ index }} + 1) % media_{{ index }}.length;
+            renderMedia_{{ index }}();
         }
 
-        .animal-card img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 5px;
+        window.prevMedia_{{ index }} = function () {
+            mediaIndex_{{ index }} = (mediaIndex_{{ index }} - 1 + media_{{ index }}.length) % media_{{ index }}.length;
+            renderMedia_{{ index }}();
         }
 
-        .carousel-btn {
-            background-color: #444;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            margin: 5px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        .carousel-btn:hover {
-            background-color: #666;
-        }
-
-        .carousel-container {
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-    <center><h1>Brady's Stock Dogs</h1></center>
-
-    <div style="display: flex; flex-wrap: wrap; justify-content: center;">
-        {% for animal in retrieve_dictionary.values() %}
-        <div class="animal-card">
-            {% if animal.image %}
-                <div class="carousel-container">
-                    <img id="image-{{ loop.index }}" src="{{ url_for('static', filename='uploads/' + animal.image[0]) }}" alt="{{ animal.name }}">
-                    <br>
-                    <button class="carousel-btn" onclick="prevImage({{ loop.index }})">Prev</button>
-                    <button class="carousel-btn" onclick="nextImage({{ loop.index }})">Next</button>
-                </div>
-                <script>
-                    const images{{ loop.index }} = {{ animal.image|tojson }};
-                    let index{{ loop.index }} = 0;
-
-                    function showImage{{ loop.index }}() {
-                        const img = document.getElementById("image-{{ loop.index }}");
-                        img.src = "/static/uploads/" + images{{ loop.index }}[index{{ loop.index }}];
-                    }
-
-                    function nextImage(cardIndex) {
-                        if (cardIndex === {{ loop.index }}) {
-                            index{{ loop.index }} = (index{{ loop.index }} + 1) % images{{ loop.index }}.length;
-                            showImage{{ loop.index }}();
-                        }
-                    }
-
-                    function prevImage(cardIndex) {
-                        if (cardIndex === {{ loop.index }}) {
-                            index{{ loop.index }} = (index{{ loop.index }} - 1 + images{{ loop.index }}.length) % images{{ loop.index }}.length;
-                            showImage{{ loop.index }}();
-                        }
-                    }
-                </script>
-            {% endif %}
-            <h3>{{ animal.name }}</h3>
-            <p><strong>Breed:</strong> {{ animal.breed }}</p>
-            <p><strong>Age:</strong> {{ animal.age }}</p>
-            <p><strong>Pedigree:</strong> {{ animal.pedigree }}</p>
-            <p><strong>Description:</strong> {{ animal.description }}</p>
-        </div>
-        {% endfor %}
-    </div>
-
-    <center><button onclick="window.location.replace('/')">Return to Home Page</button></center>
-</body>
-</html>
+        renderMedia_{{ index }}();
+    });
+</script>

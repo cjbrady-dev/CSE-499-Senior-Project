@@ -6,20 +6,20 @@
 **Project Title: Senior Project**  
 **Team Members (if applicable): Myself**  
 **Project Description: Creaiting Farm website to market farm animals available for sale, allows clients to contact farmer for purchase of animals**  
-**Technologies Used: HTML, CSS, JAVASCRIPT (currently)**  
-**GitHub URL: https://github.com/cjbrady-dev/CSE-499-Senior-Project.git** 
+**Technologies Used: HTML, CSS, JAVASCRIPT, python, FLASK, CRUD**
+**GitHub URL: https://github.com/cjbrady-dev/CSE-499-Senior-Project/blob/main/statusReports/week11** 
 
 ---
 
 ## Week 11: 7/5/25
-- **Overall Status:** (on-schedule, behind, ahead)
-- **Number of hours worked this week:**
-- **Total number of hours worked on the project thus far:**
-- **Number of total hours anticipated at completion:**
-- **Accomplishments:**
-- **Challenges:**
-- **Plans / Goals for next week:**
-- **SPED Talk Insight:**
-- **Other comments for the instructor:**
+- **Overall Status:behind**
+- **Number of hours worked this week:15**
+- **Total number of hours worked on the project thus far:92**
+- **Number of total hours anticipated at completion:34**
+- **Accomplishments:Researched diffrent formatting options, expiremented with diffrent options. Not much truely accomplished this week.**
+- **Challenges:Researching formating styles that might be more fitting for the website. Time tracker had issues, forgot log ins ext had to fix the bugs because could not get the times corrected because of how I had programed it.**
+- **Plans / Goals for next week: Finish formating css styles and crud app get page.**
+- **SPED Talk Insight:N/A**
+- **Other comments for the instructor:N/A**
 
 ---

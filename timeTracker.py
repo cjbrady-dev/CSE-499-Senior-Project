@@ -13,8 +13,10 @@ print("Press ENTER for each lap.\nType Q and press ENTER to stop.")
 
 while value.lower() != "q":
 
-    # Input for the Enter key press
+    # Input for the Enter key
     value = input()
+
+    now = time.time()
 
     # The current lap-time
     lapTime = round((time.time() - lastTime), 2)
@@ -30,7 +32,7 @@ while value.lower() != "q":
     print("*"*20)
 
     #Updating the previous total time and lap number
-    lastTime = time.time()
+    lastTime = now
     lapTime += 1
 
 print("complete")
@@ -61,7 +63,11 @@ def total_Time():
     with open(filename, mode='r') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            total_seconds += float(row["Duration (seconds)"])
+            try:
+                total_seconds += float(row["Duration (seconds)"])
+            except ValueError:
+                print(f"Skipping invalid entry: {row}")
+                continue
 
     
     # Convert to format of hours/minutes/secconds
