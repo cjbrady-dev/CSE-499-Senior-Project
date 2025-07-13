@@ -6,20 +6,18 @@
 **Project Title: Senior Project**  
 **Team Members (if applicable): Myself**  
 **Project Description: Creaiting Farm website to market farm animals available for sale, allows clients to contact farmer for purchase of animals**  
-**Technologies Used: HTML, CSS, JAVASCRIPT (currently)**  
-**GitHub URL: https://github.com/cjbrady-dev/CSE-499-Senior-Project.git** 
+**Technologies Used: HTML, CSS, JAVASCRIPT python, FLASK, CRUD**  
+**GitHub URL: https://github.com/cjbrady-dev/CSE-499-Senior-Project/blob/main/statusReports/week12** 
 
 ---
 
 ## Week 12: 7/12/25
-- **Overall Status:** (on-schedule, behind, ahead)
-- **Number of hours worked this week:**
-- **Total number of hours worked on the project thus far:**
-- **Number of total hours anticipated at completion:**
-- **Accomplishments:**
-- **Challenges:**
-- **Plans / Goals for next week:**
-- **SPED Talk Insight:**
+- **Overall Status:behind**
+- **Number of hours worked this week:15**
+- **Total number of hours worked on the project thus far:107**
+- **Number of total hours anticipated at completion:13**
+- **Accomplishments:Came to understand how to use flask better. Started testing on FLASK rather than studio visual code. Got videos and inmages to work finally with out losing progress. Started formating and styling the website to look proffetional.**
+- **Challenges: Had a huge wake up call realized I was testing and going about things all wrong. Was able to anderstand I needed to use the flask server for testing and hosting the website.**
+- **Plans / Goals for next week: Fix Get page, Add contact info to the website and it should mostly be done. Could work on security for a stretch goal and better formating.**
+- **SPED Talk Insight:N/A**
 - **Other comments for the instructor:**
-
----

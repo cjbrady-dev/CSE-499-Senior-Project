@@ -1,18 +1,30 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_from_directory
 import pickle, time, os
 from flask_apscheduler import APScheduler
 from werkzeug.utils import secure_filename
-from jinja2 import Environment, FileSystemLoader
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BRADYS_FARM_DIR = os.path.join(BASE_DIR, '..', 'Brady\'s Farm')
 
 
 app = Flask(__name__)
-UPLOAD_FOLDER = 'static/uploads'
+
+UPLOAD_FOLDER = os.path.join(BASE_DIR, 'static', 'uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+if not os.path.exists(app.config['UPLOAD_FOLDER']):
+    os.makedirs(app.config['UPLOAD_FOLDER'])
+
+#files accessible via URLs
+@app.route('/brady_static/<path:filename>')
+def brady_static(filename):
+    return send_from_directory(BRADYS_FARM_DIR, filename)
 
 if not os.path.exists('dictionary_file.pkl'):
     dictionary = {}
     with open('dictionary_file.pkl', 'wb') as file:
         pickle.dump(dictionary, file)
+
 
 
 execute_clear_dictionary = APScheduler()
@@ -45,18 +57,16 @@ def add_put_elements():
             new_age = request.form['age']
             new_pedigree = request.form['pedigree']
             new_description = request.form['description']
-            file = request.files.get('image')
-
-        files = request.files.getlist('image')
-        if files:
-            # make sure we have a list to append to
-            dictionary[key].setdefault('images', [])
-            for file in files:
-                if file and file.filename:
+            
+            files = request.files.getlist('image')
+       
+            if files and any(f.filename for f in files):
+                dictionary[key].setdefault('images', [])
+                for file in files:
                     filename = secure_filename(file.filename)
                     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                     dictionary[key]['images'].append(filename)
-
+            
             # Update other item fields
             dictionary[key]['breed'] = new_breed
             dictionary[key]['age'] = new_age
@@ -68,7 +78,7 @@ def add_put_elements():
                 pickle.dump(dictionary, file)
 
             generate_animals_html(dictionary)
-            
+                
             return render_template("/success.html")
         else:
             return render_template("error.html")
@@ -158,13 +168,23 @@ def delete_element():
     key = request.form["entry1"]
 
     if key in dictionary:
+        if 'images' in dictionary[key]:
+            for img_filename in dictionary[key]['images']:
+                file_path = os.path.join(app.config['UPLOAD_FOLDER'], img_filename)
+                if os.path.exists(file_path):
+                    os.remove(file_path)
+        if 'videos' in dictionary[key]:
+            for vid_filename in dictionary[key]['videos']:
+                file_path = os.path.join(app.config['UPLOAD_FOLDER'] , vid_filename)
+                if os.path.exists(file_path):
+                    os.remove(file_path)
+        
         del dictionary[key]
 
-        #save updated dictionary
         with open("dictionary_file.pkl", 'wb') as file:
             pickle.dump(dictionary, file)
-
-            generate_animals_html(dictionary)
+        
+        generate_animals_html(dictionary) 
 
         return render_template("/delete_success.html")
     else:
@@ -185,43 +205,35 @@ def clear_dictionary():
 
 #  HTML generator – shows *all* images & videos
 def generate_animals_html(dictionary):
-    from flask import current_app
+    from flask import current_app 
 
-   
-    with current_app.app_context():
-        output_folder = os.path.join("..", "Brady's Farm")
-        output_path = os.path.join(output_folder, "page2.html")
-        os.makedirs(output_folder, exist_ok=True)
+    output_folder = BRADYS_FARM_DIR 
+    output_path = os.path.join(output_folder, "page2.html")
+    os.makedirs(output_folder, exist_ok=True)
 
-        animals = list(dictionary.values()) if isinstance(dictionary, dict) else dictionary
+    animals = list(dictionary.values()) if isinstance(dictionary, dict) else dictionary
 
+    with current_app.app_context(): 
         rendered_html = render_template("animal_template.html", animals=animals)
 
-        with open(output_path, "w", encoding="utf-8") as f:
-            f.write(rendered_html)
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write(rendered_html)    
 
 
-    
+@app.route('/animals') 
+def show_animals():
+   
+    try:
+        with open('dictionary_file.pkl', 'rb') as file:
+            dictionary = pickle.load(file)
+    except FileNotFoundError:
+        dictionary = {} 
 
-def generate_animals_html(dictionary):
-    from flask import current_app
+    animals_data = list(dictionary.values())
 
    
-    with current_app.app_context():
-        output_folder = os.path.join("..", "Brady's Farm")
-        output_path = os.path.join(output_folder, "page2.html")
-        os.makedirs(output_folder, exist_ok=True)
-
-        animals = list(dictionary.values()) if isinstance(dictionary, dict) else dictionary
-
-        rendered_html = render_template("animal_template.html", animals=animals)
-
-        with open(output_path, "w", encoding="utf-8") as f:
-            f.write(rendered_html)
-
-    
+    return render_template("animal_template.html", animals=animals_data)
 
 if __name__== '__main__':
-    # execute_clear_dictionary.add_job(id = 'Scheduled Task', func=clear_dictionary, trigger="interval", seconds=300)
     execute_clear_dictionary.start()
     app.run(host="0.0.0.0", debug=True, port=5000)
