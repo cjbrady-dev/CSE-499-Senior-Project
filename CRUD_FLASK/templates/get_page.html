@@ -1,36 +1,101 @@
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const media_{{ index }} = {{ media | tojson }};
-        let mediaIndex_{{ index }} = 0;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Animals</title>
+    <link rel="stylesheet" href="{{ url_for('brady_static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>All Animals</h1>
 
-        function renderMedia_{{ index }}() {
-            const container = document.getElementById("media-container-{{ index }}");
-            const file = media_{{ index }}[mediaIndex_{{ index }}];
-            const ext = file.split('.').pop().toLowerCase();
+    {% if retrieve_dictionary %}
+        {% for key, animal in retrieve_dictionary.items() %}
+            <div class="animal-display-card card"> {# Added 'card' class for styling #}
+                <h3>{{ animal.name }}</h3>
+                <p>Breed: {{ animal.breed }}</p>
+                <p>Age: {{ animal.age }}</p>
+                <p>Pedigree: {{ animal.pedigree }}</p>
+                <p>Description: {{ animal.description }}</p>
 
-            if (["jpg", "jpeg", "png", "gif", "webp"].includes(ext)) {
-                container.innerHTML = `<img src="/static/uploads/${file}" alt="{{ animal.name }}">`;
-            } else if (["mp4", "webm", "ogg"].includes(ext)) {
-                container.innerHTML = `
-                    <video controls>
-                        <source src="/static/uploads/${file}" type="video/${ext}">
-                        Your browser does not support the video tag.
-                    </video>`;
-            } else {
-                container.innerHTML = `<p>Unsupported format</p>`;
-            }
-        }
+                {# Initialize media list for the current animal #}
+                {% set media = (animal.images if animal.images else []) + (animal.videos if animal.videos else []) %}
 
-        window.nextMedia_{{ index }} = function () {
-            mediaIndex_{{ index }} = (mediaIndex_{{ index }} + 1) % media_{{ index }}.length;
-            renderMedia_{{ index }}();
-        }
+                {% if media %}
+                    <div id="media-container-{{ loop.index0 }}" class="media-carousel carousel"> {# Added 'carousel' class #}
+                        {# Initial rendering will happen via JS #}
+                    </div>
+                    <div class="media-buttons carousel-buttons"> {# Added 'carousel-buttons' class #}
+                        <button onclick="prevMedia_{{ loop.index0 }}()">Previous</button>
+                        <button onclick="nextMedia_{{ loop.index0 }}()">Next</button>
+                    </div>
 
-        window.prevMedia_{{ index }} = function () {
-            mediaIndex_{{ index }} = (mediaIndex_{{ index }} - 1 + media_{{ index }}.length) % media_{{ index }}.length;
-            renderMedia_{{ index }}();
-        }
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            const media_{{ loop.index0 }} = {{ media | tojson }};
+                            let mediaIndex_{{ loop.index0 }} = 0;
 
-        renderMedia_{{ index }}();
-    });
-</script>
+                            function renderMedia_{{ loop.index0 }}() {
+                                const container = document.getElementById("media-container-{{ loop.index0 }}");
+                                if (!container) return; // Add a check to prevent errors if container isn't found
+                                
+                                if (media_{{ loop.index0 }}.length === 0) {
+                                    container.innerHTML = '<p>No media available.</p>';
+                                    return;
+                                }
+                                const file = media_{{ loop.index0 }}[mediaIndex_{{ loop.index0 }}];
+                                const ext = file.split('.').pop().toLowerCase();
+                                // Use url_for for the static uploads path here too, for robustness
+                                const uploadPath = "{{ url_for('static', filename='uploads/') }}";
+
+                                // Clear existing content before adding new
+                                container.innerHTML = ''; 
+
+                                if (["jpg", "jpeg", "png", "gif", "webp"].includes(ext)) {
+                                    const img = document.createElement('img');
+                                    img.src = `${uploadPath}${file}`;
+                                    img.alt = "{{ animal.name }}";
+                                    img.classList.add('active'); // Add active class for immediate display
+                                    container.appendChild(img);
+                                } else if (["mp4", "webm", "ogg"].includes(ext)) {
+                                    const video = document.createElement('video');
+                                    video.controls = true;
+                                    video.classList.add('active'); // Add active class for immediate display
+                                    const source = document.createElement('source');
+                                    source.src = `${uploadPath}${file}`;
+                                    source.type = `video/${ext}`;
+                                    video.appendChild(source);
+                                    video.innerHTML += `Your browser does not support the video tag.`; // Fallback text
+                                    container.appendChild(video);
+                                } else {
+                                    container.innerHTML = `<p>Unsupported format</p>`;
+                                }
+                            }
+
+                            // Expose functions globally with unique names for each carousel
+                            window.nextMedia_{{ loop.index0 }} = function () {
+                                mediaIndex_{{ loop.index0 }} = (mediaIndex_{{ loop.index0 }} + 1) % media_{{ loop.index0 }}.length;
+                                renderMedia_{{ loop.index0 }}();
+                            }
+
+                            window.prevMedia_{{ loop.index0 }} = function () {
+                                mediaIndex_{{ loop.index0 }} = (mediaIndex_{{ loop.index0 }} - 1 + media_{{ loop.index0 }}.length) % media_{{ loop.index0 }}.length;
+                                renderMedia_{{ loop.index0 }}();
+                            }
+
+                            renderMedia_{{ loop.index0 }}(); // Initial render when page loads
+                        });
+                    </script>
+                {% else %}
+                    <p>No media available for this animal.</p>
+                {% endif %}
+                <hr> {# Separator between animals #}
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No animals found in the dictionary.</p>
+    {% endif %}
+
+    <p><a href="/">Back to Home</a></p>
+</body>
+</html>

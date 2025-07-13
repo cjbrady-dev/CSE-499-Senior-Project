@@ -6,7 +6,7 @@ function nextMedia(id) {
     items[currentIndex].classList.remove('active');
     const nextIndex = (currentIndex + 1) % items.length;
     items[nextIndex].classList.add('active');
-    }
+}
 
 function prevMedia(id) {
     const carousel = document.getElementById(id);
@@ -16,4 +16,4 @@ function prevMedia(id) {
     items[currentIndex].classList.remove('active');
     const prevIndex = (currentIndex - 1 + items.length) % items.length;
     items[prevIndex].classList.add('active');
-    }
+}
