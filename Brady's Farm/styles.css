@@ -39,9 +39,11 @@ body {
 nav {
     
     text-align: center;
+    font-size: xx-large;
     background-color: var(--secondary-color);
     border: #000000 solid 1px;
-    width: 100px;
+    width: auto;
+    height: auto;
     max-width: 1200px;
     margin: 0 auto 20px auto;
     border-radius: 8px;
@@ -50,7 +52,7 @@ nav {
 header {
     
     text-align: center;
-   
+    font-size: xx-large;
     padding: 10px;
     width: 100%;
     max-width: 1200px;
@@ -67,9 +69,9 @@ h1 {
 }
 
 p {
-    background-color: var(--primary-color);
+    background-color: var(--accent1-color);
     border: #000000 solid 3px;
-    color: var(--accent2-color);
+    color: var(--primary-color);
     padding: 3px;
     font-size: 28px;
     font-family: var(--paragraph-font);
@@ -92,7 +94,8 @@ p {
     display: block;
     max-width: 60%;
     margin: 0 auto;
-    border-radius: 8px;
+    border-radius: 85px;
+    border-color: #030303;
 }
 
 main { 
@@ -170,7 +173,7 @@ main #mainLogo {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     object-position: center;
     transition: opacity 0.5s ease-in-out;
     opacity: 0;
