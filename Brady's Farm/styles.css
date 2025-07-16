@@ -40,13 +40,16 @@ nav {
     
     text-align: center;
     font-size: xx-large;
-    background-color: var(--secondary-color);
+    background-color: var(--accent1-color);
     border: #000000 solid 1px;
     width: auto;
     height: auto;
     max-width: 1200px;
     margin: 0 auto 20px auto;
     border-radius: 8px;
+    overflow: hidden;
+    position:fixed;
+    bottom: 0;
 }
 
 header {
@@ -61,17 +64,19 @@ header {
     color: var(--headline-color-on-color); 
 }
 
-h1 {
+h1, h2, h3 {
     font-family: var(--heading-font);
     color: var(--accent1-color); 
     text-align: center;
     margin-bottom: 20px;
+    font-size: xx-large;
 }
 
 p {
     background-color: var(--accent1-color);
     border: #000000 solid 3px;
     color: var(--primary-color);
+    text-align: center;
     padding: 3px;
     font-size: 28px;
     font-family: var(--paragraph-font);
