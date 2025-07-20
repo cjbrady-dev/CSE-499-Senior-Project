@@ -48,7 +48,7 @@ nav {
     margin: 0 auto 20px auto;
     border-radius: 8px;
     overflow: hidden;
-    position:fixed;
+    position:relative;
     bottom: 0;
 }
 
@@ -134,6 +134,7 @@ main #mainLogo {
 }
 
 .card {
+    color: var(--accent1-color);
     flex: 1 1 23%;
     min-width: 280px;
     max-width: 380px;
@@ -199,8 +200,8 @@ main #mainLogo {
 }
 
 .card .carousel-buttons button {
-    background-color: var(--primary-color);
-    color: var(--accent2-color);
+    background-color: var(--accent1-color);
+    color: var(--primary-color);
     border: none;
     padding: 8px 15px;
     margin: 0 3px;
@@ -222,14 +223,14 @@ main #mainLogo {
     width: 100%;
 }
 
-.card .info h3 {
+.card .info {
     margin: 0 0 8px 0;
     font-size: 1.3rem;
     font-family: var(--heading-font);
-    color: var(--secondary-color);
+    color: var(--accent1-color);
 }
 
-.card .info p {
+.card .info {
     margin: 5px 0 0 0;
     color: var(--secondary-color);
     font-size: 1rem;

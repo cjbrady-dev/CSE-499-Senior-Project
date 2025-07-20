@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Animals</title>
+    
     <link rel="stylesheet" href="{{ url_for('brady_static', filename='styles.css') }}">
 </head>
 <body>
@@ -45,10 +46,10 @@
                                 }
                                 const file = media_{{ loop.index0 }}[mediaIndex_{{ loop.index0 }}];
                                 const ext = file.split('.').pop().toLowerCase();
-                                // Use url_for for the static uploads path here too, for robustness
+                                
                                 const uploadPath = "{{ url_for('static', filename='uploads/') }}";
 
-                                // Clear existing content before adding new
+                                
                                 container.innerHTML = ''; 
 
                                 if (["jpg", "jpeg", "png", "gif", "webp"].includes(ext)) {
